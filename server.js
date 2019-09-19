@@ -5,6 +5,8 @@ mongoose = require('mongoose'),
 Task = require('./api/models/listModel'), //created model loading here
 bodyParser = require('body-parser');
 
+app.get("/", (req, res, next) => res.send ("HELLO!"));
+
 // mongoose instance connection url connection
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/Tododb', { useNewUrlParser: true }); 
