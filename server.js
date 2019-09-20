@@ -1,11 +1,13 @@
 require("dotenv").config()
-
+var cors = require('cors')
 var express = require('express'),
 app = express(),
 port = process.env.PORT || 4000,
 mongoose = require('mongoose'),
 Task = require('./api/models/listModel'), //created model loading here
 bodyParser = require('body-parser');
+
+app.use(cors())
 
 console.log(process.env)
 app.get("/", (req, res, next) => res.send ("HELLO!"));
