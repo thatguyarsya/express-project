@@ -1,3 +1,5 @@
+require("dotenv").config()
+
 var express = require('express'),
 app = express(),
 port = process.env.PORT || 4000,
@@ -5,11 +7,13 @@ mongoose = require('mongoose'),
 Task = require('./api/models/listModel'), //created model loading here
 bodyParser = require('body-parser');
 
+console.log(process.env)
 app.get("/", (req, res, next) => res.send ("HELLO!"));
 
 // mongoose instance connection url connection
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/Tododb', { useNewUrlParser: true }); 
+// mongoose.connect('mongodb://localhost/Tododb', { useNewUrlParser: true }); 
+mongoose.connect(`mongodb+srv://${process.env.username}:${process.env.password}@cluster0-rsb5p.mongodb.net/Tododb?retryWrites=true&w=majority`, { useNewUrlParser: true }); 
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
