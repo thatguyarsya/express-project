@@ -12,10 +12,10 @@ app.use(cors())
 console.log(process.env)
 app.get("/", (req, res, next) => res.send ("HELLO!"));
 
-// mongoose instance connection url connection
+//mongoose instance connection url connection
 mongoose.Promise = global.Promise;
-// mongoose.connect('mongodb://localhost/Tododb', { useNewUrlParser: true }); 
-mongoose.connect(`mongodb+srv://Bob:bobby@cluster0-rsb5p.mongodb.net/Tododb?retryWrites=true&w=majority`, { useNewUrlParser: true }); 
+//mongoose.connect('mongodb://localhost/Tododb', { useNewUrlParser: true }); 
+mongoose.connect(`mongodb+srv://Bob:bobby@cluster0-rsb5p.mongodb.net/Tododb?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true }); 
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
