@@ -9,28 +9,6 @@ const bodyParser = require("body-parser");
 
 const priorityRoutes = require("./api/routes/priorityRoutes"); //importing route
 const routes = require("./api/routes/listRoutes");
-// const db = require("./config/db")
-
-// const objectId = require("mongodb").ObjectID;
-app.use(cors());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
-app.use(function(req, res) {
-  res.status(404).send({ url: req.originalUrl + " not found" });
-});
-// console.log(process.env)
-
-//mongoose instance connection url connection
-//mongoose.connect('mongodb://localhost/Tododb', { useNewUrlParser: true, useUnifiedTopology: true });
-
-app.get("/", (req, res, next) => res.send("HELLO!"));
-routes(app); //register the route
-priorityRoutes(app);
-
-// db.connect(()=>{
-//   app.listen(port, () => console.log(`port on ${port}!`));
-// });
 
 mongoose.Promise = global.Promise;
 mongoose
@@ -44,6 +22,28 @@ mongoose
   .catch(error => {
     console.error(error);
   });
+// const db = require("./config/db")
+
+// const objectId = require("mongodb").ObjectID;
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+// console.log(process.env)
+
+//mongoose instance connection url connection
+//mongoose.connect('mongodb://localhost/Tododb', { useNewUrlParser: true, useUnifiedTopology: true });
+
+app.get("/", (req, res, next) => res.send("HELLO!"));
+routes(app); //register the route
+priorityRoutes(app);
+
+app.use(function(req, res) {
+  res.status(404).send({ url: req.originalUrl + " not found" });
+});
+// db.connect(()=>{
+//   app.listen(port, () => console.log(`port on ${port}!`));
+// });
 
 app.listen(port, () => {
   console.log("list RESTful API server started on: " + port);
