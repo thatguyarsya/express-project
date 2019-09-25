@@ -7,6 +7,9 @@ module.exports = function(app) {
         .get(list.list_task)
         .post(list.create_task);
 
+    app.route('/tasks/populate')
+        .get(list.getpopulate)
+
     app.route('/tasks/:taskID')
         .get(list.read_task)
         .put(list.update_task)

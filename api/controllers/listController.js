@@ -3,13 +3,15 @@
 
 var mongoose = require('mongoose'),
  Task = mongoose.model('Tasks');
-
  exports.list_task = function(req, res) {
-     Task.find({}, function(err, task) {
-         if (err)
-         res.send(err);
-        res.json(task);
-     });
+     Task.find().then(result => res.json(result)).catch(error => res.send(error))
+     
+    //  {}, function(err, task) {
+    //      if (err)
+    //      res.send(err);
+    //     res.json(task);
+    //  });
+    
  };
 
  exports.create_task = function(req, res) {
@@ -48,5 +50,6 @@ exports.update_task = function(req, res) {
     });
   };
   
-
- 
+  exports.getpopulate = function(req, res) {
+     Task.find().populate('priority', 'priority -_id').then(result => res.json(result)).catch(error => res.send(error))
+  } 

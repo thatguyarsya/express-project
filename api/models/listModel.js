@@ -17,7 +17,12 @@ var TaskSchema = new Schema ({
             enum: ['pending', 'ongoing', 'completed']
         }],
         default: ['pending']
+    },
+    priority: {
+        type: Schema.Types.ObjectId,
+        ref: "Priority"
     }
+    
 });
 
 module.exports = mongoose.model ('Tasks', TaskSchema);

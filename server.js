@@ -7,19 +7,18 @@ mongoose = require('mongoose'),
 Task = require('./api/models/listModel'), //created model loading here
 bodyParser = require('body-parser');
 
-const MongoClient = require("mongodb").MongoClient;
-const assert = require("assert");
-const objectId = require("mongodb").ObjectID;
+const db = require("./config/db")
 
+const objectId = require("mongodb").ObjectID;
 app.use(cors())
 
-console.log(process.env)
+// console.log(process.env)
 app.get("/", (req, res, next) => res.send ("HELLO!"));
 
 
 //mongoose instance connection url connection
 mongoose.Promise = global.Promise;
-//mongoose.connect('mongodb://localhost/Tododb', { useNewUrlParser: true }); 
+//mongoose.connect('mongodb://localhost/Tododb', { useNewUrlParser: true, useUnifiedTopology: true }); 
 mongoose.connect(`mongodb+srv://Bob:bobby@cluster0-rsb5p.mongodb.net/Tododb?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true }); 
 
 
@@ -27,9 +26,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
-var routes = require('./api/routes/listRoutes'); //importing route
+var routes = require('./api/routes/listRoutes');
+var priorityRoutes = require('./api/routes/priorityRoutes') //importing route
 routes(app); //register the route
-
+priorityRoutes(app);
 
 app.listen(port);
 
@@ -39,3 +39,8 @@ console.log('list RESTful API server started on: ' + port);
 app.use(function(req, res) {
     res.status(404).send({url: req.originalUrl + ' not found'})
   });
+
+
+// db.connect(()=>{
+//   app.listen(port, () => console.log(`port on ${port}!`));
+// });
