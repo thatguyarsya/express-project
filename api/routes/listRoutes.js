@@ -1,6 +1,6 @@
 'use strict';
 module.exports = function(app) {
-    var list = require('../controllers/listController');
+    const list = require('../controllers/listController');
 
     //list routes
     app.route('/tasks')
